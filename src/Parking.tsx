@@ -51,6 +51,7 @@ const Temp: React.FC<TempProps> = ({ activeId, handleDragMove, handleDragEnd, va
                                         to: name,
                                     });
                                 }}
+                                activeClassName="gray"
                                 className={"selectOption"}
                                 handleDragEnd={handleDragEnd}
                             >
