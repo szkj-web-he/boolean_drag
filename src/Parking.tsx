@@ -10,7 +10,7 @@ import { OptionProps, PublicTempProps } from "./unit";
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
 interface TempProps extends PublicTempProps {
-    values?: OptionProps;
+    values?: Array<OptionProps>;
 
     activeId?: string;
 }
@@ -41,27 +41,37 @@ const Temp: React.FC<TempProps> = ({ activeId, handleDragMove, handleDragEnd, va
                 </div>
 
                 <div className="parking_container">
-                    <ScrollComponent>
-                        {values && (
-                            <Drag
-                                handleDragMove={({ name }) => {
-                                    handleDragMove({
-                                        from: "1",
-                                        data: { ...values },
-                                        to: name,
-                                    });
-                                }}
-                                className={"selectOption"}
-                                handleDragEnd={handleDragEnd}
-                            >
-                                <span
-                                    className="dragContent"
-                                    dangerouslySetInnerHTML={{
-                                        __html: values.content,
-                                    }}
-                                />
-                            </Drag>
-                        )}
+                    <ScrollComponent
+                        hidden={{
+                            x: true,
+                        }}
+                    >
+                        <div className="parking_content">
+                            {values?.map((item) => {
+                                return (
+                                    <Drag
+                                        key={item.code}
+                                        handleDragMove={({ name }) => {
+                                            handleDragMove({
+                                                from: "1",
+                                                data: { ...item },
+                                                to: name,
+                                            });
+                                        }}
+                                        activeClassName="gray"
+                                        className={"selectOption"}
+                                        handleDragEnd={handleDragEnd}
+                                    >
+                                        <span
+                                            className="dragContent"
+                                            dangerouslySetInnerHTML={{
+                                                __html: item.content,
+                                            }}
+                                        />
+                                    </Drag>
+                                );
+                            })}
+                        </div>
                     </ScrollComponent>
                 </div>
             </div>

@@ -37,7 +37,6 @@ export const Warehouse: React.FC<WarehouseProps> = ({ list, handleDragMove, hand
                         className="dragItem"
                         handleDragEnd={handleDragEnd}
                         handleDragCancel={handleDragEnd}
-                        portalClassName="dragPortal"
                     >
                         <span
                             className="dragContent"

@@ -173,6 +173,8 @@ body > div:first-child {
     border-radius: 6px;
     border: 1px solid #ebebeb;
     cursor: pointer;
+    margin-right: 16px;
+    margin-bottom: 12px;
 }
 
 .parking_body {
@@ -204,6 +206,10 @@ body > div:first-child {
 .parking_container {
     height: calc(100% - 20px - 17px);
     margin-top: 17px;
+}
+
+.parking_content {
+    width: calc(100% + 16px);
 }
 
 /********** 下方 放置区域 end ******************/

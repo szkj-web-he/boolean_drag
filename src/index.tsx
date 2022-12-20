@@ -38,7 +38,7 @@ const Main: React.FC = () => {
     /**
      * 已被选择的选项
      */
-    const [selectList, setSelectList] = useState<OptionProps>();
+    const [selectList, setSelectList] = useState<Array<OptionProps>>();
 
     const boxesRef = useRef<Array<BoxItem>>([]);
 
@@ -55,12 +55,23 @@ const Main: React.FC = () => {
     /************* This section will include this component parameter *************/
 
     useEffect(() => {
+        const state: Record<string, "0" | "1"> = {};
+
+        const options = comms.config.options ?? [];
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+
+            const data = selectList?.find((item) => item.code === option.code);
+
+            state[option.code] = data ? "1" : "0";
+        }
+
         /**
-         * 一维单选
+         * 一维多选
          *
          * 传给plugin loader的数据
          */
-        comms.state = selectList;
+        comms.state = state;
     }, [selectList]);
 
     /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
@@ -94,17 +105,39 @@ const Main: React.FC = () => {
                 const arr: typeof pre = [];
                 for (let i = 0; i < pre.length; i++) {
                     const item = pre[i];
-                    if (item.code !== data.value.code) {
+                    const usedData = selectList?.find(
+                        (selectItem) => selectItem.code === item.code,
+                    );
+                    if (item.code !== data.value.code && !usedData) {
                         arr.push({ ...item });
                     }
                 }
                 return arr;
             });
 
-            setSelectList({ ...data.value });
-        } else {
-            setSelectList(undefined);
-            setList(deepCloneData(comms.config.options) ?? []);
+            setSelectList((pre) => {
+                const arr = pre ? [...pre] : [];
+                arr.push({ ...data.value });
+                return [...arr];
+            });
+        } else if (data?.value) {
+            setSelectList((pre) => {
+                const preArr = pre ?? [];
+                const arr: OptionProps[] = [];
+                for (let i = 0; i < preArr.length; i++) {
+                    const item = preArr[i];
+
+                    if (item.code !== data.value.code) {
+                        arr.push({ ...item });
+                    }
+                }
+                return arr;
+            });
+            setList((pre) => {
+                const arr = pre ? [...pre] : [];
+                arr.push({ ...data.value });
+                return [...arr];
+            });
         }
     };
 
