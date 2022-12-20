@@ -99,3 +99,5 @@ export const autoScroll = (clientY: number, scrollData: AutoScrollProps, delay =
         scrollData.timer && window.clearTimeout(scrollData.timer);
     }
 };
+
+export const isIpad = (): boolean => window.matchMedia("(min-width: 501px)").matches;

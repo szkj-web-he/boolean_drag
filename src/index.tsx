@@ -17,7 +17,7 @@ export const comms = new PluginComms({
     config: {
         question?: string;
         instruction?: string;
-        options?: Array<OptionProps>;
+        options?: Array<Array<OptionProps>>;
         optionsInstruction?: string;
     };
     state: unknown;
@@ -28,17 +28,20 @@ const Main: React.FC = () => {
     /************* This section will include this component HOOK function *************/
 
     /**
-     * 可供选择的选项
-     * 菜单
-     */
-    const [list, setList] = useState(() => {
-        return deepCloneData(comms.config.options) ?? [];
-    });
-
-    /**
      * 已被选择的选项
      */
-    const [selectList, setSelectList] = useState<OptionProps>();
+    const [selectList, setSelectList] = useState(() => {
+        const rows = comms.config.options?.[0] ?? [];
+
+        const data: Record<string, OptionProps | null> = {};
+
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            data[row.code] = null;
+        }
+
+        return data;
+    });
 
     const boxesRef = useRef<Array<BoxItem>>([]);
 
@@ -56,11 +59,16 @@ const Main: React.FC = () => {
 
     useEffect(() => {
         /**
-         * 一维单选
+         * 二维单选
          *
          * 传给plugin loader的数据
          */
-        comms.state = selectList;
+        const data: Record<string, string | null> = {};
+        for (const key in selectList) {
+            data[key] = selectList[key]?.code ?? null;
+        }
+
+        comms.state = data;
     }, [selectList]);
 
     /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
@@ -88,24 +96,20 @@ const Main: React.FC = () => {
         if (data?.to == data?.from) {
             return;
         }
-        //这里是添加
-        if (data?.to) {
-            setList((pre) => {
-                const arr: typeof pre = [];
-                for (let i = 0; i < pre.length; i++) {
-                    const item = pre[i];
-                    if (item.code !== data.value.code) {
-                        arr.push({ ...item });
-                    }
-                }
-                return arr;
-            });
 
-            setSelectList({ ...data.value });
-        } else {
-            setSelectList(undefined);
-            setList(deepCloneData(comms.config.options) ?? []);
-        }
+        setSelectList((pre) => {
+            const selectData = { ...pre };
+
+            if (data?.from) {
+                selectData[data.from] = null;
+            }
+
+            if (data?.to) {
+                selectData[data.to] = { ...data.value };
+            }
+
+            return { ...selectData };
+        });
     };
 
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
@@ -120,13 +124,8 @@ const Main: React.FC = () => {
             >
                 <Header />
                 <DragContext.Provider value={{ boxes: boxesRef.current }}>
-                    <Warehouse
-                        list={list}
-                        handleDragMove={handleDragMove}
-                        handleDragEnd={handleDragEnd}
-                    />
+                    <Warehouse handleDragMove={handleDragMove} handleDragEnd={handleDragEnd} />
                     <div className="hr" />
-
                     <Parking
                         handleDragMove={handleDragMove}
                         handleDragEnd={handleDragEnd}

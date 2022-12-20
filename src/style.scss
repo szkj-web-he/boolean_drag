@@ -88,7 +88,7 @@ body > div:first-child {
 
 .warehouse_scrollBody {
     min-height: 100px;
-    max-height: 178px;
+    max-height: calc(100vh * 0.3);
 }
 
 .warehouse_body {
@@ -141,7 +141,7 @@ body > div:first-child {
 }
 
 .hr {
-    margin: 40px 0;
+    margin: 32px 0;
     width: 100%;
     height: 1px;
     background-color: #ebebeb;
@@ -149,21 +149,51 @@ body > div:first-child {
 
 /********** 下方 放置区域 start ******************/
 
-.optionItem {
-    width: 100%;
-    height: 163px;
-    background: #fafafa;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: row nowrap;
-    &.active {
-        .parking_body {
-            border: 1px dashed #22a6b3;
-            background: #e9f7f8;
-        }
+.parking_total {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    font-family: $fontFamily;
+    letter-spacing: 0.2px;
+    color: #bdbdbd;
+    margin-bottom: 12px;
+}
+
+.parking_totalValue {
+    color: #22a6b3;
+    margin: 0 5px;
+    display: inline-block;
+
+    &.red {
+        color: red;
     }
+}
+
+.deskWrap {
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px 20px 0px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    width: calc(100% + 24px);
+    .parkContainer {
+        margin-right: 24px;
+        flex: 0 0 auto;
+        margin-bottom: 20px;
+    }
+}
+
+.parkContainer {
+    height: 180px;
+    background: #ffffff;
+    box-shadow: 0px 2px 8px rgba(26, 26, 26, 0.08), 0px 2px 4px rgba(26, 26, 26, 0.03);
+    border-radius: 6px;
+    padding: 8px 12px;
+    box-sizing: border-box;
 }
 
 .selectOption {
@@ -175,19 +205,7 @@ body > div:first-child {
     cursor: pointer;
 }
 
-.parking_body {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    background: #ffffff;
-    box-shadow: 0px 2px 8px rgba(26, 26, 26, 0.08), 0px 2px 4px rgba(26, 26, 26, 0.03);
-    border-radius: 6px;
-    padding: 8px 12px;
-    box-sizing: border-box;
-    border: 1px solid #fff;
-    transition: all 0.1s linear;
-}
-
-.parking_head {
+.parkName {
     width: 100%;
     font-family: $fontFamily;
     font-weight: 500;
@@ -197,11 +215,11 @@ body > div:first-child {
     color: #bdbdbd;
 }
 
-.headContent * {
+.parkName * {
     display: inline;
 }
 
-.parking_container {
+.parkContent {
     height: calc(100% - 20px - 17px);
     margin-top: 17px;
 }
@@ -236,3 +254,68 @@ body > div:first-child {
 }
 
 /*************** btn_wrap end *****************************/
+
+/***** 平板样式 start **/
+
+.ipadWrap {
+    padding-bottom: 10px;
+}
+
+.ipad_view {
+    background: #fafafa;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.ipad_gallery {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.ipadGroup_wrap {
+    padding: 20px;
+    flex: 0 0 auto;
+    width: 100vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+    height: 180px * 2 + 20px + 20px * 2;
+    box-sizing: border-box;
+}
+
+.ipadGroup_item {
+    width: calc(calc(100vw - 20px * 2 - 2 * 24px) / 3);
+    margin-right: 24px;
+    margin-bottom: 20px;
+    &:nth-child(3n) {
+        margin-right: 0;
+    }
+    &:nth-child(n + 4) {
+        margin-bottom: 0;
+    }
+}
+
+.ipad_dianWrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+    margin-top: 24px;
+}
+
+.ipad_dian {
+    background: #ebebeb;
+    border-radius: 10px;
+    width: 16px;
+    height: 6px;
+    margin-right: 8px;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+/***** 平板样式 end **/

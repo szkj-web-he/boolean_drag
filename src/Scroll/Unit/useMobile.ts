@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const isMobile = (): boolean => {
+export const isMobile = (): boolean => {
     return window.matchMedia("(any-pointer:coarse)").matches;
 };
 

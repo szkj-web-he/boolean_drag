@@ -2,27 +2,22 @@
 /** This section will include all the necessary dependence for this tsx file */
 
 import React from "react";
-import { OptionProps, PublicTempProps } from "./unit";
-import { ScrollComponent } from "./Scroll";
+import { comms } from ".";
 import { Drag } from "./Drag";
+import { ScrollComponent } from "./Scroll";
+import { PublicTempProps } from "./unit";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 
 /** This section will include all the interface for this tsx file */
-export interface WarehouseProps extends PublicTempProps {
-    list?: Array<OptionProps>;
-}
 
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-export const Warehouse: React.FC<WarehouseProps> = ({ list, handleDragMove, handleDragEnd }) => {
-    const arr = list ?? [];
+export const Warehouse: React.FC<PublicTempProps> = ({ handleDragMove, handleDragEnd }) => {
+    const arr = comms.config.options?.[1] ?? [];
 
     const content = (
         <div className="warehouse_body">
-            <div className="placeholder" style={arr.length ? { display: "none" } : {}}>
-                暂无可拖拽的选项
-            </div>
             {arr.map((item) => {
                 return (
                     <Drag
@@ -50,6 +45,7 @@ export const Warehouse: React.FC<WarehouseProps> = ({ list, handleDragMove, hand
             })}
         </div>
     );
+
     return (
         <div className="warehouse_wrap">
             <div className="warehouse_total">
