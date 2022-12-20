@@ -23,11 +23,6 @@ export interface DragMoveProps extends DragPramsProps {
     name?: string;
 }
 
-export interface ParkingProps {
-    id: string;
-    value?: OptionProps;
-}
-
 export interface PublicTempProps {
     /**
      * 拖拽move的回调

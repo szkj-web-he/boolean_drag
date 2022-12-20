@@ -72,6 +72,8 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
 
         const timer = useRef<number>();
 
+        const globalClass = useRef<HTMLStyleElement>();
+
         const cRef = useTouch(
             (res) => {
                 //触摸开始
@@ -101,6 +103,17 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
                 setPosition({
                     ...point.current,
                 });
+
+                const pointerStyle = window.getComputedStyle(node, null).cursor;
+                globalClass.current = document.createElement("style");
+                globalClass.current.innerHTML = `
+                *{
+                    cursor:${pointerStyle} !important;
+                }import { useState } from 'react';
+import { useMemo } from 'react';
+
+                `;
+                document.head.append(globalClass.current);
             },
             (res) => {
                 //触摸中~
@@ -165,6 +178,8 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
                     height: 0,
                 };
                 setPosition(undefined);
+                globalClass.current?.remove();
+                globalClass.current = undefined;
             },
             () => {
                 //触摸取消
@@ -178,6 +193,8 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
                     height: 0,
                 };
                 setPosition(undefined);
+                globalClass.current?.remove();
+                globalClass.current = undefined;
             },
         );
 
@@ -188,6 +205,7 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
         useEffect(() => {
             return () => {
                 timer.current && window.clearTimeout(timer.current);
+                globalClass.current?.remove();
             };
         }, []);
 

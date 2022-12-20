@@ -7,7 +7,7 @@ instruction: "从中选出10个放入框内排序"
 # For the purposes of reproducing a bug
 options:
     [
-        { "code": "1", "content": "T恤" },
+        { "code": "1", "content": " <div>T</div><div>恤</div>" },
         { "code": "2", "content": "短袖" },
         { "code": "3", "content": "长裤" },
         { "code": "4", "content": "运动鞋" },
@@ -48,4 +48,4 @@ column: 8
 # column: 5
 
 # options instruction
-optionsInstruction: "请排序选项"
+optionsInstruction: "请将答案选项放置在这里"

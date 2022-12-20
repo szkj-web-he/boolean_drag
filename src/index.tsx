@@ -2,7 +2,7 @@ import "./font.scss";
 import "./style.scss";
 
 import React, { useEffect, useRef, useState } from "react";
-import { deepCloneData, OptionProps, ParkingProps } from "./unit";
+import { deepCloneData, OptionProps } from "./unit";
 
 import { ConfigYML, PluginComms } from "@possie-engine/dr-plugin-sdk";
 import { BoxItem, DragContext } from "./dragContext";
@@ -17,8 +17,7 @@ export const comms = new PluginComms({
     config: {
         question?: string;
         instruction?: string;
-        options?: Array<{ code: string; content: string }>;
-        column?: number;
+        options?: Array<OptionProps>;
         optionsInstruction?: string;
     };
     state: unknown;
@@ -28,22 +27,18 @@ const Main: React.FC = () => {
     /* <------------------------------------ **** STATE START **** ------------------------------------ */
     /************* This section will include this component HOOK function *************/
 
-    const listRef = useRef(comms.config.options ? deepCloneData(comms.config.options) : []);
-    const [list, setList] = useState([...listRef.current]);
+    /**
+     * 可供选择的选项
+     * 菜单
+     */
+    const [list, setList] = useState(() => {
+        return deepCloneData(comms.config.options) ?? [];
+    });
 
-    const placementListRef = useRef(
-        (() => {
-            const column = comms.config.column ?? 3;
-            const arr: Array<ParkingProps> = [];
-            for (let i = 0; i < column; i++) {
-                arr.push({
-                    id: `${i}`,
-                });
-            }
-            return arr;
-        })(),
-    );
-    const [placementList, setPlacementList] = useState([...placementListRef.current]);
+    /**
+     * 已被选择的选项
+     */
+    const [selectList, setSelectList] = useState<OptionProps>();
 
     const boxesRef = useRef<Array<BoxItem>>([]);
 
@@ -60,27 +55,13 @@ const Main: React.FC = () => {
     /************* This section will include this component parameter *************/
 
     useEffect(() => {
-        //一维开放
-        const options = comms.config.options ?? [];
-
-        const data: Record<string, number | null> = {};
-        for (let i = 0; i < options.length; i++) {
-            const item = options[i];
-
-            let value: number | null = null;
-            for (let j = 0; j < placementList.length; ) {
-                const _item = placementList[j];
-                if (_item.value?.code === item.code) {
-                    value = j + 1;
-                    j = placementList.length;
-                } else {
-                    ++j;
-                }
-            }
-            data[item.code] = value;
-        }
-        comms.state = data;
-    }, [placementList]);
+        /**
+         * 一维单选
+         *
+         * 传给plugin loader的数据
+         */
+        comms.state = selectList;
+    }, [selectList]);
 
     /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
     /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
@@ -107,74 +88,24 @@ const Main: React.FC = () => {
         if (data?.to == data?.from) {
             return;
         }
-        //这里是删除
-        let n = -1;
-        if (data?.from) {
-            for (let i = 0; i < placementListRef.current.length; ) {
-                const item = placementListRef.current[i];
-                if (item.id === data.from) {
-                    n = i;
-                    i = placementListRef.current.length;
-                } else {
-                    ++i;
-                }
-            }
-            if (n >= 0) {
-                placementListRef.current[n].value = undefined;
-            }
-        }
-
         //这里是添加
         if (data?.to) {
-            for (let i = 0; i < placementListRef.current.length; ) {
-                const item = placementListRef.current[i];
-
-                if (item.id === data.to) {
-                    if (n >= 0 && item.value) {
-                        placementListRef.current[n].value = {
-                            code: item.value.code,
-                            content: item.value.content,
-                        };
+            setList((pre) => {
+                const arr: typeof pre = [];
+                for (let i = 0; i < pre.length; i++) {
+                    const item = pre[i];
+                    if (item.code !== data.value.code) {
+                        arr.push({ ...item });
                     }
-
-                    item.value = {
-                        code: data.value.code,
-                        content: data.value.content,
-                    };
-                    i = placementListRef.current.length;
-                } else {
-                    ++i;
                 }
-            }
-        }
+                return arr;
+            });
 
-        /**
-         * 过滤掉选中的
-         * 剩下的还原到上方的原始那一栏
-         */
-        const arr: Array<OptionProps> = [];
-        const selectData: Record<string, true> = {};
-        for (let i = 0; i < placementListRef.current.length; i++) {
-            const item = placementListRef.current[i];
-            if (item.value) {
-                selectData[item.value.code] = true;
-            }
+            setSelectList({ ...data.value });
+        } else {
+            setSelectList(undefined);
+            setList(deepCloneData(comms.config.options) ?? []);
         }
-        const options = comms.config.options ?? [];
-        for (let i = 0; i < options.length; i++) {
-            const item = options[i];
-            if (!selectData[item.code]) {
-                arr.push({
-                    code: item.code,
-                    content: item.content,
-                });
-            }
-        }
-
-        listRef.current = [...arr];
-
-        setList([...listRef.current]);
-        setPlacementList([...placementListRef.current]);
     };
 
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
@@ -197,10 +128,10 @@ const Main: React.FC = () => {
                     <div className="hr" />
 
                     <Parking
-                        list={placementList}
                         handleDragMove={handleDragMove}
                         handleDragEnd={handleDragEnd}
                         activeId={activeId}
+                        values={selectList}
                     />
                 </DragContext.Provider>
             </ScrollComponent>
