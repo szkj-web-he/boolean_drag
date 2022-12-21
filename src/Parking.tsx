@@ -1,16 +1,13 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { comms } from ".";
-import { ParkingContext } from "./ParkItems/Unit/parkContext";
-import { useMobile } from "./Scroll/Unit/useMobile";
-import { isIpad, OptionProps, PublicTempProps } from "./unit";
 import Desk from "./ParkItems/desk";
 import Ipad from "./ParkItems/ipad";
 import Mobile from "./ParkItems/mobile";
-import { useState } from "react";
-import { useEffect } from "react";
+import { ParkingContext } from "./ParkItems/Unit/parkContext";
 import { isMobile } from "./Scroll/Unit/useMobile";
+import { isIpad, OptionProps, PublicTempProps } from "./unit";
 
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -91,43 +88,6 @@ const Temp: React.FC<TempProps> = ({ ...props }) => {
                 {mobileStatus ? <Mobile /> : ipadStatus ? <Ipad /> : <Desk />}
             </ParkingContext.Provider>
         </div>
-
-        // <DragBox id="1" className={activeId ? "active" : ""}>
-        //     <div className="parking_body">
-        //         <div className="parking_head">
-        //             <span
-        //                 className="headContent"
-        //                 dangerouslySetInnerHTML={{ __html: comms.config.optionsInstruction ?? "" }}
-        //             />
-        //         </div>
-
-        //         <div className="parking_container">
-        //             <ScrollComponent>
-        //                 {values && (
-        //                     <Drag
-        //                         handleDragMove={({ name }) => {
-        //                             handleDragMove({
-        //                                 from: "1",
-        //                                 data: { ...values },
-        //                                 to: name,
-        //                             });
-        //                         }}
-        //                         activeClassName="gray"
-        //                         className={"selectOption"}
-        //                         handleDragEnd={handleDragEnd}
-        //                     >
-        //                         <span
-        //                             className="dragContent"
-        //                             dangerouslySetInnerHTML={{
-        //                                 __html: values.content,
-        //                             }}
-        //                         />
-        //                     </Drag>
-        //                 )}
-        //             </ScrollComponent>
-        //         </div>
-        //     </div>
-        // </DragBox>
     );
 };
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */

@@ -39,7 +39,7 @@ const Temp: React.FC = () => {
                 style={{
                     width: `calc(calc(calc(100vw - 16px * 2 - 20px) / 1.7) * ${rows.length} + ${
                         rows.length ? rows.length - 1 : 0
-                    } * 20px)`,
+                    } * 20px + 16px)`,
                 }}
             >
                 {rows.map((item) => {
