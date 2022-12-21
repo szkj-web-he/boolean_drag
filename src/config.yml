@@ -14,7 +14,7 @@ options:
             { "code": "d", "content": "喜欢买" },
             { "code": "e", "content": "讨厌吃" },
             { "code": "f", "content": "讨厌玩" },
-            { "code": "e", "content": "讨厌穿" },
+            { "code": "g", "content": "讨厌穿" },
             { "code": "h", "content": "讨厌买" },
         ],
         [

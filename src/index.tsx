@@ -33,11 +33,11 @@ const Main: React.FC = () => {
     const [selectList, setSelectList] = useState(() => {
         const rows = comms.config.options?.[0] ?? [];
 
-        const data: Record<string, OptionProps | null> = {};
+        const data: Record<string, Array<OptionProps>> = {};
 
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
-            data[row.code] = null;
+            data[row.code] = [];
         }
 
         return data;
@@ -59,13 +59,26 @@ const Main: React.FC = () => {
 
     useEffect(() => {
         /**
-         * 二维单选
+         * 二维多选
          *
          * 传给plugin loader的数据
          */
-        const data: Record<string, string | null> = {};
-        for (const key in selectList) {
-            data[key] = selectList[key]?.code ?? null;
+        const rows = comms.config.options?.[0] ?? [];
+        const cols = comms.config.options?.[1] ?? [];
+
+        const data: Record<string, Record<string, "0" | "1">> = {};
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const rowData: Record<string, "0" | "1"> = {};
+            for (let j = 0; j < cols.length; j++) {
+                const col = cols[j];
+
+                rowData[col.code] = selectList[row.code].find((item) => item.code === col.code)
+                    ? "1"
+                    : "0";
+            }
+
+            data[row.code] = rowData;
         }
 
         comms.state = data;
@@ -101,11 +114,21 @@ const Main: React.FC = () => {
             const selectData = { ...pre };
 
             if (data?.from) {
-                selectData[data.from] = null;
+                const fromArr: Array<OptionProps> = [];
+                for (let i = 0; i < selectData[data.from].length; i++) {
+                    const item = selectData[data.from][i];
+                    if (item.code !== data.value.code) {
+                        fromArr.push({ ...item });
+                    }
+                }
+                selectData[data.from] = [...fromArr];
             }
 
             if (data?.to) {
-                selectData[data.to] = { ...data.value };
+                const toArr = [...selectData[data.to]];
+                if (!toArr.find((item) => item.code === data.value.code)) {
+                    selectData[data.to].push({ ...data.value });
+                }
             }
 
             return { ...selectData };
