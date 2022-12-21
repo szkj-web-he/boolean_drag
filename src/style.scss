@@ -313,9 +313,48 @@ body > div:first-child {
     width: 16px;
     height: 6px;
     margin-right: 8px;
+    transition: all 0.1s linear;
+    cursor: pointer;
+
     &:last-child {
         margin-right: 0;
+    }
+    &.active {
+        width: 40px;
+        background: rgba(#bdbdbd, 0.8);
     }
 }
 
 /***** 平板样式 end **/
+
+/***** 手机样式 start ******/
+
+.mobileWrap {
+    width: 100%;
+    height: 212px;
+    background: #fafafa;
+    border-radius: 10px;
+}
+
+.mobile_scrollBody {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.mobile_parkMain {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+}
+
+.mobile_parkContainer {
+    margin-left: 20px;
+    flex: 0 0 auto;
+    width: calc(calc(100vw - 16px * 2 - 20px) / 1.7);
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+/***** 手机样式 end ******/

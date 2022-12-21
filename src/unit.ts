@@ -51,20 +51,32 @@ export interface AutoScrollProps {
      * 0是没有
      * 1是向下
      * -1是向上
+     *
+     * -2是向左
+     * 2是向有
      */
-    direction: 0 | 1 | -1;
+    direction: 0 | 1 | -1 | 2 | -2;
     /**
      * 计时器
      */
     timer: number | null;
 }
 
-export const autoScroll = (clientY: number, scrollData: AutoScrollProps, delay = 500): void => {
+export const autoScroll = (
+    clientX: number,
+    clientY: number,
+    scrollData: AutoScrollProps,
+    delay = 500,
+): void => {
     const el = document.getElementsByClassName("wrapperBody")[0];
+    /**
+     * 手机版的横向滚动容器
+     */
+    const hEl = document.getElementsByClassName("mobile_scrollBody")[0];
 
     if (
         el instanceof HTMLElement &&
-        clientY > window.innerHeight - 20 &&
+        clientY > document.documentElement.offsetHeight - 20 &&
         el.scrollHeight > el.scrollTop + el.offsetHeight
     ) {
         //向下
@@ -77,10 +89,13 @@ export const autoScroll = (clientY: number, scrollData: AutoScrollProps, delay =
             scrollData.timer = null;
             if (el.scrollHeight > el.scrollTop + el.offsetHeight) {
                 el.scrollTop = el.scrollTop + 1;
-                autoScroll(clientY, scrollData, 0);
+                autoScroll(clientX, clientY, scrollData, 0);
             }
         }, delay);
-    } else if (el instanceof HTMLElement && clientY < 20) {
+        return;
+    }
+
+    if (el instanceof HTMLElement && clientY < 20) {
         //向上
         if (scrollData.direction === -1 && scrollData.timer) {
             return;
@@ -91,13 +106,60 @@ export const autoScroll = (clientY: number, scrollData: AutoScrollProps, delay =
             scrollData.timer = null;
             if (el.scrollTop > 0) {
                 el.scrollTop = el.scrollTop - 1;
-                autoScroll(clientY, scrollData, 0);
+                autoScroll(clientX, clientY, scrollData, 0);
             }
         }, delay);
-    } else {
-        scrollData.direction = 0;
-        scrollData.timer && window.clearTimeout(scrollData.timer);
+        return;
     }
+
+    if (hEl instanceof HTMLElement && clientX < 50) {
+        const els = document.elementsFromPoint(clientX, clientY);
+        if (els.includes(hEl)) {
+            //向左
+            if (scrollData.direction === -2 && scrollData.timer) {
+                return;
+            }
+
+            scrollData.direction = -2;
+            scrollData.timer && window.clearTimeout(scrollData.timer);
+            scrollData.timer = window.setTimeout(() => {
+                scrollData.timer = null;
+                if (hEl.scrollLeft > 0) {
+                    hEl.scrollLeft = hEl.scrollLeft - 1;
+                    autoScroll(clientX, clientY, scrollData, 0);
+                }
+            }, delay);
+            return;
+        }
+    }
+    if (
+        hEl instanceof HTMLElement &&
+        clientX + 50 > document.documentElement.offsetWidth &&
+        hEl.scrollWidth > hEl.scrollLeft + hEl.offsetWidth
+    ) {
+        const els = document.elementsFromPoint(clientX, clientY);
+
+        //向右
+        if (els.includes(hEl)) {
+            if (scrollData.direction === 2 && scrollData.timer) {
+                return;
+            }
+
+            scrollData.direction = 2;
+            scrollData.timer && window.clearTimeout(scrollData.timer);
+            scrollData.timer = window.setTimeout(() => {
+                scrollData.timer = null;
+                if (hEl.scrollWidth > hEl.scrollLeft + hEl.offsetWidth) {
+                    hEl.scrollLeft = hEl.scrollLeft + 1;
+                    autoScroll(clientX, clientY, scrollData, 0);
+                }
+            }, delay);
+            return;
+        }
+    }
+
+    scrollData.direction = 0;
+    scrollData.timer && window.clearTimeout(scrollData.timer);
 };
 
 export const isIpad = (): boolean => window.matchMedia("(min-width: 501px)").matches;

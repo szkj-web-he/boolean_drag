@@ -6,7 +6,10 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React, { useState } from "react";
+import React from "react";
+import { comms } from "..";
+import ParkContainer from "../parkContainer";
+import { ScrollComponent } from "../Scroll";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -21,8 +24,36 @@ const Temp: React.FC = () => {
     /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
     /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
     /************* This section will include this component general function *************/
+    const rows = comms.config.options?.[0] ?? [];
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
-    return <div className="mobileWrap"></div>;
+    return (
+        <ScrollComponent
+            className="mobileWrap"
+            bodyClassName="mobile_scrollBody"
+            hidden={{
+                y: true,
+            }}
+        >
+            <div
+                className="mobile_parkMain"
+                style={{
+                    width: `calc(calc(calc(100vw - 16px * 2 - 20px) / 1.7) * ${rows.length} + ${
+                        rows.length ? rows.length - 1 : 0
+                    } * 20px)`,
+                }}
+            >
+                {rows.map((item) => {
+                    return (
+                        <ParkContainer
+                            key={item.code}
+                            rowData={item}
+                            className="mobile_parkContainer"
+                        />
+                    );
+                })}
+            </div>
+        </ScrollComponent>
+    );
 };
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */
 export default Temp;

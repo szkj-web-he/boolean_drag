@@ -95,7 +95,7 @@ export const useTouch = (
                 clientY,
             });
             //这里自动向下滚动
-            autoScroll(clientY, scrollData);
+            autoScroll(clientX, clientY, scrollData);
         };
 
         /**
@@ -128,6 +128,7 @@ export const useTouch = (
                 return true;
             }
             e.preventDefault();
+            e.stopPropagation();
             e.stopImmediatePropagation();
 
             scrollData.timer && window.clearTimeout(scrollData.timer);
@@ -197,7 +198,7 @@ export const useTouch = (
             });
             //这里自动向下滚动
 
-            autoScroll(clientY, scrollData);
+            autoScroll(clientX, clientY, scrollData);
         };
 
         const handleMouseUp = (e: MouseEvent) => {
