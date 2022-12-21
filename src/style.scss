@@ -147,6 +147,16 @@ body > div:first-child {
     background-color: #ebebeb;
 }
 
+.placeholder {
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    color: #4d4d4d;
+}
+
 /********** 下方 放置区域 start ******************/
 
 .optionItem {
