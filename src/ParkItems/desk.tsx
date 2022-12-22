@@ -30,7 +30,7 @@ const Temp: React.FC = () => {
 
             const bodyWidth = document.documentElement.offsetWidth;
             //减padding值
-            const val = bodyWidth - 20 * 4;
+            const val = bodyWidth - 20 * 4 - 3 * 2;
 
             /**
              * 理想值
@@ -45,9 +45,9 @@ const Temp: React.FC = () => {
             } while (val < sumWidth && col > 1);
 
             if (col === 1) {
-                setWidth(`calc(100vw - 20px * 4)`);
+                setWidth(`calc(100vw - 20px * 4 - 3px * 2 )`);
             } else {
-                setWidth(`calc(calc(100vw - 20px * 4 - ${col - 1} * 24px) / ${col})`);
+                setWidth(`calc(calc(100vw - 20px * 4 - 3px * 2 - ${col - 1} * 24px) / ${col})`);
             }
         };
         fn();

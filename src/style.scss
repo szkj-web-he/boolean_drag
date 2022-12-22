@@ -198,16 +198,33 @@ body > div:first-child {
 }
 
 .deskWrap {
-    background-color: #fafafa;
     border-radius: 10px;
     padding: 20px 20px 0px 20px;
     box-sizing: border-box;
-
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 10px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
     width: 100%;
     .parkContainer {
         margin-right: 24px;
         flex: 0 0 auto;
         margin-bottom: 20px;
+    }
+
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        width: calc(100% - 14px);
+        height: calc(100% - 14px);
+        border-radius: 6px;
+        background-color: #f7fbfe;
+        z-index: 0;
     }
 }
 
@@ -217,15 +234,22 @@ body > div:first-child {
     flex-flow: row wrap;
     align-content: flex-start;
     width: calc(100% + 24px);
+    position: relative;
+    z-index: 2;
 }
 
 .parkContainer {
     height: 180px;
-    background: #ffffff;
-    box-shadow: 0px 2px 8px rgba(26, 26, 26, 0.08), 0px 2px 4px rgba(26, 26, 26, 0.03);
+    background: #f7fbfe;
     border-radius: 6px;
     padding: 8px 12px;
     box-sizing: border-box;
+    border: 1px solid #c6dee5;
+    border-radius: 2px;
+    transition: all 0.1s linear;
+    &.active {
+        background-color: #e3f1f4;
+    }
 }
 
 .selectOption {
@@ -244,7 +268,7 @@ body > div:first-child {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #287788;
 }
 
 .parkName * {
@@ -310,10 +334,21 @@ body > div:first-child {
     padding-bottom: 10px;
 }
 
+.ipad_body {
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 10px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+    padding: 7px;
+    box-sizing: border-box;
+}
+
 .ipad_view {
-    background: #fafafa;
+    background: #f7fbfe;
     border-radius: 10px;
-    width: 100%;
+    overflow: hidden;
 }
 
 .ipad_gallery {
@@ -326,7 +361,7 @@ body > div:first-child {
 .ipadGroup_wrap {
     padding: 20px;
     flex: 0 0 auto;
-    width: 100vw;
+    width: calc(100vw - 20px * 2 - 10px * 2);
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -336,7 +371,7 @@ body > div:first-child {
 }
 
 .ipadGroup_item {
-    width: calc(calc(100vw - 20px * 2 - 2 * 24px) / 3);
+    width: calc(calc(100vw - 20px * 4 - 2 * 24px - 10px * 2) / 3);
     margin-right: 24px;
     margin-bottom: 20px;
     &:nth-child(3n) {
@@ -357,7 +392,7 @@ body > div:first-child {
 }
 
 .ipad_dian {
-    background: #ebebeb;
+    background: #bdbdbd;
     border-radius: 10px;
     width: 16px;
     height: 6px;
@@ -370,7 +405,7 @@ body > div:first-child {
     }
     &.active {
         width: 40px;
-        background: rgba(#bdbdbd, 0.8);
+        background: rgba(#287788, 0.8);
     }
 }
 
@@ -380,9 +415,16 @@ body > div:first-child {
 
 .mobileWrap {
     width: 100%;
-    height: 212px;
-    background: #fafafa;
-    border-radius: 10px;
+    height: 232px;
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 10px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .selectOption {
         margin-right: 10px;
@@ -391,6 +433,13 @@ body > div:first-child {
     .parkContent_itemList {
         width: calc(100% + 10px);
     }
+}
+
+.mobileBody {
+    width: calc(100% - 7px * 2);
+    height: calc(100% - 7px * 2);
+    background-color: #f7fbfe;
+    border-radius: 10px;
 }
 
 .mobile_scrollBody {
@@ -408,7 +457,7 @@ body > div:first-child {
 .mobile_parkContainer {
     margin-left: 20px;
     flex: 0 0 auto;
-    width: calc(calc(100vw - 16px * 2 - 20px) / 1.7);
+    width: calc(calc(100vw - 16px * 2 - 20px - 20px * 2 - 3px * 2 - 7px * 2) / 1.7);
     &:first-child {
         margin-left: 0;
     }

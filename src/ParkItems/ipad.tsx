@@ -557,29 +557,31 @@ const Temp: React.FC = () => {
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
     return (
         <div className="ipadWrap">
-            <div className="ipad_view">
-                <div
-                    className="ipad_gallery"
-                    ref={ref}
-                    style={{
-                        transform: `translateX(${translateX.current}px)`,
-                    }}
-                >
-                    {groups.map((group, n) => {
-                        return (
-                            <div key={n} className="ipadGroup_wrap">
-                                {group.map((item) => {
-                                    return (
-                                        <ParkContainer
-                                            key={item.code}
-                                            rowData={item}
-                                            className={"ipadGroup_item"}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        );
-                    })}
+            <div className="ipad_body">
+                <div className="ipad_view">
+                    <div
+                        className="ipad_gallery"
+                        ref={ref}
+                        style={{
+                            transform: `translateX(${translateX.current}px)`,
+                        }}
+                    >
+                        {groups.map((group, n) => {
+                            return (
+                                <div key={n} className="ipadGroup_wrap">
+                                    {group.map((item) => {
+                                        return (
+                                            <ParkContainer
+                                                key={item.code}
+                                                rowData={item}
+                                                className={"ipadGroup_item"}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
             <div className="ipad_dianWrap">
