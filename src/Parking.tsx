@@ -13,7 +13,7 @@ import { isIpad, OptionProps, PublicTempProps } from "./unit";
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
 export interface TempProps extends PublicTempProps {
-    values: Record<string, Array<OptionProps>>;
+    values: Record<string, OptionProps | null>;
 
     activeId?: string;
 }

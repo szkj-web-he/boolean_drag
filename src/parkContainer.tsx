@@ -59,30 +59,28 @@ const Temp: React.FC<TempProps> = ({ style, className, rowData }) => {
                     }}
                 >
                     <div className="parkContent_itemList">
-                        {colData.map((item) => {
-                            return (
-                                <Drag
-                                    key={item.code}
-                                    handleDragMove={({ name }) => {
-                                        handleDragMove({
-                                            from: rowData.code,
-                                            data: { ...item },
-                                            to: name,
-                                        });
+                        {colData && (
+                            <Drag
+                                key={colData.code}
+                                handleDragMove={({ name }) => {
+                                    handleDragMove({
+                                        from: rowData.code,
+                                        data: { ...colData },
+                                        to: name,
+                                    });
+                                }}
+                                activeClassName="gray"
+                                className={"selectOption"}
+                                handleDragEnd={handleDragEnd}
+                            >
+                                <span
+                                    className="dragContent"
+                                    dangerouslySetInnerHTML={{
+                                        __html: colData.content,
                                     }}
-                                    activeClassName="gray"
-                                    className={"selectOption"}
-                                    handleDragEnd={handleDragEnd}
-                                >
-                                    <span
-                                        className="dragContent"
-                                        dangerouslySetInnerHTML={{
-                                            __html: item.content,
-                                        }}
-                                    />
-                                </Drag>
-                            );
-                        })}
+                                />
+                            </Drag>
+                        )}
                     </div>
                 </ScrollComponent>
             </div>
