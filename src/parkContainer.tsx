@@ -44,11 +44,7 @@ const Temp: React.FC<TempProps> = ({ style, className, rowData }) => {
     activeId === rowData.code && classList.push("active");
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
     return (
-        <DragBox
-            className={`parkContainer${className ? ` ${className}` : ""}`}
-            id={rowData.code}
-            style={style}
-        >
+        <DragBox className={classList.join(" ")} id={rowData.code} style={style}>
             <div className="parkName">
                 <span
                     dangerouslySetInnerHTML={{
