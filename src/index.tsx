@@ -60,7 +60,7 @@ const Main: React.FC = () => {
          *
          * 传给plugin loader的数据
          */
-        comms.state = selectList;
+        comms.state = selectList?.code ?? undefined;
     }, [selectList]);
 
     /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
@@ -90,10 +90,11 @@ const Main: React.FC = () => {
         }
         //这里是添加
         if (data?.to) {
+            const options = deepCloneData(comms.config.options) ?? [];
             setList((pre) => {
                 const arr: typeof pre = [];
-                for (let i = 0; i < pre.length; i++) {
-                    const item = pre[i];
+                for (let i = 0; i < options.length; i++) {
+                    const item = options[i];
                     if (item.code !== data.value.code) {
                         arr.push({ ...item });
                     }
