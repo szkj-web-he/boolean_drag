@@ -175,16 +175,21 @@ body > div:first-child {
     border-radius: 10px;
     padding: 20px 20px 0px 20px;
     box-sizing: border-box;
-    display: flex;
-    align-items: flex-start;
-    flex-flow: row wrap;
-    align-content: flex-start;
-    width: calc(100% + 24px);
+
+    width: 100%;
     .parkContainer {
         margin-right: 24px;
         flex: 0 0 auto;
         margin-bottom: 20px;
     }
+}
+
+.deskContainer {
+    width: calc(100% + 24px);
+    display: flex;
+    align-items: flex-start;
+    flex-flow: row wrap;
+    align-content: flex-start;
 }
 
 .parkContainer {

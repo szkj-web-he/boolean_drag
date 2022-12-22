@@ -64,9 +64,11 @@ const Temp: React.FC = () => {
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
     return (
         <div className="deskWrap">
-            {rows?.map((item) => {
-                return <ParkContainer key={item.code} rowData={item} style={{ width }} />;
-            })}
+            <div className="deskContainer">
+                {rows?.map((item) => {
+                    return <ParkContainer key={item.code} rowData={item} style={{ width }} />;
+                })}
+            </div>
         </div>
     );
 };
