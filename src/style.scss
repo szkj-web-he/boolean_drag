@@ -293,6 +293,10 @@ body > div:first-child {
     border-style: solid;
     border-radius: 4px;
     background-color: #f7fbfe;
+    transition: all 0.1s linear;
+    &:hover {
+        box-shadow: 0 0 5px rgba(#fff, 0.8);
+    }
     &.gray {
         background-color: rgba(#fff, 0.4);
         border-image: none;
