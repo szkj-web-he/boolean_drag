@@ -16,7 +16,7 @@ body > div:first-child {
     overflow: hidden;
 }
 
-.wrapperScroll {
+.wrapper {
     background-image: url("./Image/bg.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -294,7 +294,7 @@ body > div:first-child {
     border-radius: 4px;
     background-color: #f7fbfe;
     &.gray {
-        background-color: rgba(gray, 0.2);
+        background-color: rgba(#fff, 0.4);
         border-image: none;
         border-color: transparent;
         * {
