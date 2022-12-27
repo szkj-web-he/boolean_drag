@@ -36,7 +36,9 @@ const Temp: React.FC<TempProps> = ({ activeId, handleDragMove, handleDragEnd, va
                 <div className="parking_head">
                     <span
                         className="headContent"
-                        dangerouslySetInnerHTML={{ __html: comms.config.optionsInstruction ?? "" }}
+                        dangerouslySetInnerHTML={{
+                            __html: comms.config.optionsInstruction ?? "",
+                        }}
                     />
                 </div>
 
