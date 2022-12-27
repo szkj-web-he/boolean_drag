@@ -77,6 +77,7 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
         const cRef = useTouch(
             (res) => {
                 //触摸开始
+                timer.current && window.clearTimeout(timer.current);
                 handleDragStart?.({
                     x: res.pageX,
                     y: res.pageY,
@@ -183,6 +184,7 @@ import { useMemo } from 'react';
             },
             () => {
                 //触摸取消
+                timer.current && window.clearTimeout(timer.current);
                 handleDragCancel?.();
                 point.current = {
                     x: 0,
