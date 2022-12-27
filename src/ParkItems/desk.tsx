@@ -43,7 +43,6 @@ const Temp: React.FC = () => {
                 --col;
                 sumWidth = 166 * col + (col - 1) * 20;
             } while (val < sumWidth && col > 1);
-            console.log(val);
             if (col === 1) {
                 setWidth(`calc(100vw - 20px * 2 - 20px - 21px - 7px * 2)`);
             } else {
