@@ -30,8 +30,7 @@ const Temp: React.FC = () => {
 
             const bodyWidth = document.documentElement.offsetWidth;
             //减padding值
-            const val = bodyWidth - 20 * 2;
-
+            const val = bodyWidth - 20 * 2 - 3 * 2 - 12 * 2 - 8 * 2;
             /**
              * 理想值
              */
@@ -41,13 +40,17 @@ const Temp: React.FC = () => {
             let sumWidth = 0;
             do {
                 --col;
-                sumWidth = 166 * col + (col - 1) * 24;
+                sumWidth = 166 * col + (col - 1) * 10;
             } while (val < sumWidth && col > 1);
 
             if (col === 1) {
-                setWidth(`calc(100vw - 20px * 2)`);
+                setWidth(`calc(100vw - 20px * 2 - 3px * 2 - 8px * 2 - 12px * 2)`);
             } else {
-                setWidth(`calc(calc(100vw - 20px * 2 - ${col - 1} * 24px) / ${col})`);
+                setWidth(
+                    `calc(calc(100vw - 20px * 2 - 3px * 2 - 8px * 2 - 12px * 2 - ${
+                        col - 1
+                    } * 10px) / ${col})`,
+                );
             }
         };
         fn();
@@ -64,10 +67,12 @@ const Temp: React.FC = () => {
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
     return (
         <div className="deskWrap">
-            <div className="deskContainer">
-                {rows?.map((item) => {
-                    return <ParkContainer key={item.code} rowData={item} style={{ width }} />;
-                })}
+            <div className="deskView">
+                <div className="deskContainer">
+                    {rows?.map((item) => {
+                        return <ParkContainer key={item.code} rowData={item} style={{ width }} />;
+                    })}
+                </div>
             </div>
         </div>
     );

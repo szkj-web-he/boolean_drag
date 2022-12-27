@@ -16,8 +16,20 @@ body > div:first-child {
     overflow: hidden;
 }
 
+.wrapper {
+    background-image: url("./Image/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 90% 50%;
+    background-color: transparent;
+}
+
 .wrapperScroll {
-    background: #fff;
+    background-color: rgba(#212121, 0.1);
+}
+
+.wrapperBody {
+    padding: 0 20px;
 }
 
 .question {
@@ -31,7 +43,7 @@ body > div:first-child {
 }
 
 .questionContent {
-    color: #212121;
+    color: #287788;
     font-family: $fontFamily;
     font-style: normal;
     font-weight: 500;
@@ -41,23 +53,13 @@ body > div:first-child {
 }
 
 .questionDes {
-    color: #757575;
+    color: #f5f5f5;
     font-family: $fontFamily;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0.2px;
-}
-
-@mixin Total {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    font-family: $fontFamily;
-    letter-spacing: 0.2px;
-    color: #212121;
 }
 
 /****** 上方原始数据部分 start *********/
@@ -69,11 +71,11 @@ body > div:first-child {
     line-height: 20px;
     font-family: $fontFamily;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #fff;
 }
 
 .warehouse_totalVal {
-    color: #22a6b3;
+    color: #25d9ff;
     margin: 0 5px;
 
     &.red {
@@ -111,11 +113,10 @@ body > div:first-child {
 }
 
 .dragItem {
-    padding: 8px 12px;
+    padding: 5px 9px;
     box-sizing: content-box;
     border-radius: 6px;
-    border: 1px solid #ebebeb;
-
+    position: relative;
     @include DragItem();
     margin-right: 20px;
     margin-bottom: 16px;
@@ -137,13 +138,7 @@ body > div:first-child {
     position: absolute !important;
     pointer-events: none;
     box-sizing: border-box;
-}
-
-.hr {
-    margin: 32px 0;
-    width: 100%;
-    height: 1px;
-    background-color: #ebebeb;
+    border-radius: 6px;
 }
 
 /********** 下方 放置区域 start ******************/
@@ -155,12 +150,12 @@ body > div:first-child {
     line-height: 20px;
     font-family: $fontFamily;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #fff;
     margin-bottom: 12px;
 }
 
 .parking_totalValue {
-    color: #22a6b3;
+    color: #25d9ff;
     margin: 0 5px;
     display: inline-block;
 
@@ -170,51 +165,75 @@ body > div:first-child {
 }
 
 .deskWrap {
-    background-color: #fafafa;
-    border-radius: 10px;
-    padding: 20px 20px 0px 20px;
+    border-radius: 16px;
+
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 10px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+    padding: 8px 0;
+
     box-sizing: border-box;
 
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+
     .parkContainer {
-        margin-right: 24px;
         flex: 0 0 auto;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
+        margin-right: 10px;
     }
 }
 
+.deskView {
+    width: calc(100% - 8px * 2);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+    background-color: #f7fbfe;
+    border-radius: 4px;
+    box-shadow: 0 -5px 0 4px rgba(#f7fbff, 0.16);
+    padding: 11px 12px 0 12px;
+    box-sizing: border-box;
+}
+
 .deskContainer {
-    width: calc(100% + 24px);
+    width: calc(100% + 10px);
     display: flex;
     align-items: flex-start;
     flex-flow: row wrap;
     align-content: flex-start;
+    flex: 0 0 auto;
 }
 
 .parkContainer {
     height: 180px;
-    background: #ffffff;
-    box-shadow: 0px 2px 8px rgba(26, 26, 26, 0.08), 0px 2px 4px rgba(26, 26, 26, 0.03);
-    border-radius: 6px;
-    padding: 8px 12px;
+    background: #f7fbfe;
+    padding: 3px 8px;
     box-sizing: border-box;
-    border: 1px solid #fff;
+    border-radius: 1px;
+    box-shadow: inset 0 0 3px #d8e6eb;
     transition: all 0.1s linear;
+
     &.active {
-        background: #e9f7f8;
-        border: 1px dashed #22a6b3;
+        background: #e3f1f4;
     }
 }
 
 .selectOption {
     @include DragItem();
-    padding: 8px 12px;
+    padding: 5px 9px;
     box-sizing: content-box;
     border-radius: 6px;
-    border: 1px solid #ebebeb;
     cursor: pointer;
     margin-right: 16px;
     margin-bottom: 13px;
+    position: relative;
 }
 
 .parkName {
@@ -224,7 +243,7 @@ body > div:first-child {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #287788;
 }
 
 .parkName * {
@@ -240,8 +259,19 @@ body > div:first-child {
 
 /*************** btn_wrap start *****************************/
 .btn_wrap {
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 3px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+    &:not(.gray):hover {
+        box-shadow: 0 0 5px rgba(#fff, 0.8);
+    }
     &.gray {
-        background-color: rgba(gray, 0.2);
+        background-color: rgba(#fff, 0.4);
+        border-image: none;
+        border-color: transparent;
         * {
             visibility: hidden;
         }
@@ -255,14 +285,10 @@ body > div:first-child {
 }
 
 .dragPortalContainer {
-    @include DragItem();
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: row wrap;
-    border-radius: 6px;
-    border: 1px solid #ebebeb;
-    box-sizing: border-box;
 }
 
 /*************** btn_wrap end *****************************/
@@ -273,10 +299,33 @@ body > div:first-child {
     padding-bottom: 10px;
 }
 
+.ipad_border {
+    border-radius: 16px;
+
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 10px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+    padding: 8px 0;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+}
+
 .ipad_view {
-    background: #fafafa;
-    border-radius: 10px;
-    width: 100%;
+    background-color: #f7fbfe;
+    border-radius: 4px;
+    box-shadow: 0 -5px 0 4px rgba(#f7fbff, 0.16);
+
+    box-sizing: border-box;
+    width: calc(100% - 8px * 2);
+    overflow: hidden;
 }
 
 .ipad_gallery {
@@ -287,21 +336,22 @@ body > div:first-child {
 }
 
 .ipadGroup_wrap {
-    padding: 20px;
     flex: 0 0 auto;
-    width: 100vw;
+    width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-flow: row wrap;
-    height: 180px * 2 + 20px + 20px * 2;
+    height: 180px * 2 + 15px + 11px * 2;
     box-sizing: border-box;
+    padding: 11px 12px 0 12px;
+    align-content: flex-start;
 }
 
 .ipadGroup_item {
-    width: calc(calc(100vw - 20px * 2 - 2 * 24px) / 3);
-    margin-right: 24px;
-    margin-bottom: 20px;
+    width: calc(calc(100vw - 20px * 2 - 3px * 2 - 12px * 2 - 8px * 2 - 2 * 10px) / 3);
+    margin-right: 10px;
+    margin-bottom: 15px;
     &:nth-child(3n) {
         margin-right: 0;
     }
@@ -320,7 +370,7 @@ body > div:first-child {
 }
 
 .ipad_dian {
-    background: #ebebeb;
+    background: #fff;
     border-radius: 10px;
     width: 16px;
     height: 6px;
@@ -333,7 +383,7 @@ body > div:first-child {
     }
     &.active {
         width: 40px;
-        background: rgba(#bdbdbd, 0.8);
+        background: rgba(#287788, 0.8);
     }
 }
 
@@ -341,11 +391,31 @@ body > div:first-child {
 
 /***** 手机样式 start ******/
 
+.mobileWrapper {
+    border-radius: 16px;
+
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 10px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+    padding: 8px 0;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+}
+
 .mobileWrap {
-    width: 100%;
+    width: calc(100% - 8px * 2) !important;
     height: 212px;
-    background: #fafafa;
-    border-radius: 10px;
+    background-color: #f7fbfe;
+    border-radius: 4px;
+    box-shadow: 0 -5px 0 4px rgba(#f7fbff, 0.16);
 
     .selectOption {
         margin-right: 10px;
@@ -371,7 +441,7 @@ body > div:first-child {
 .mobile_parkContainer {
     margin-left: 20px;
     flex: 0 0 auto;
-    width: calc(calc(100vw - 16px * 2 - 20px) / 1.7);
+    width: calc(calc(100vw - 16px * 2 - 20px * 2 - 3px * 2 - 8px * 2 - 20px) / 1.7);
     &:first-child {
         margin-left: 0;
     }
@@ -381,4 +451,44 @@ body > div:first-child {
 
 .parkContent_itemList {
     width: calc(100% + 16px);
+}
+
+.hr_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+    margin-top: 20px;
+    margin-bottom: 26px;
+}
+
+.hr_left {
+    flex: 1 1 auto;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.hr_center {
+    width: 46px;
+    height: 28px;
+    background-image: url("./Image/hr.png");
+    background-color: transparent;
+    margin: 0 12px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 0 0;
+}
+
+.hr_right {
+    flex: 1 1 auto;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.btn_icon {
+    position: absolute;
+    right: -16px;
+    bottom: -10px;
 }
