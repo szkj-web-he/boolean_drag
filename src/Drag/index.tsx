@@ -243,6 +243,7 @@ import { useMemo } from 'react';
                                 "dragPortalContainer" +
                                 (portalClassName ? ` ${portalClassName}` : "")
                             }
+                            key={JSON.stringify(position)}
                             style={{
                                 ...portalStyle,
                                 left: `${position.x}px`,
