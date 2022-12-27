@@ -6,6 +6,7 @@ import { Drag } from "./Drag";
 import { DragBox } from "./DragBox";
 import { ScrollComponent } from "./Scroll";
 import { OptionProps, PublicTempProps } from "./unit";
+import textImg from "./Image/icon_text.png";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -32,47 +33,52 @@ const Temp: React.FC<TempProps> = ({ activeId, handleDragMove, handleDragEnd, va
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
     return (
         <DragBox id="1" className={activeId ? "active" : ""}>
-            <div className="parking_body">
-                <div className="parking_head">
-                    <span
-                        className="headContent"
-                        dangerouslySetInnerHTML={{ __html: comms.config.optionsInstruction ?? "" }}
-                    />
-                </div>
+            <img src={textImg} alt="" className="parking_icon" />
+            <div className="parking_wrapper">
+                <div className="parking_body">
+                    <div className="parking_head">
+                        <span
+                            className="headContent"
+                            dangerouslySetInnerHTML={{
+                                __html: comms.config.optionsInstruction ?? "",
+                            }}
+                        />
+                    </div>
 
-                <div className="parking_container">
-                    <ScrollComponent
-                        hidden={{
-                            x: true,
-                        }}
-                    >
-                        <div className="parking_content">
-                            {values?.map((item) => {
-                                return (
-                                    <Drag
-                                        key={item.code}
-                                        handleDragMove={({ name }) => {
-                                            handleDragMove({
-                                                from: "1",
-                                                data: { ...item },
-                                                to: name,
-                                            });
-                                        }}
-                                        activeClassName="gray"
-                                        className={"selectOption"}
-                                        handleDragEnd={handleDragEnd}
-                                    >
-                                        <span
-                                            className="dragContent"
-                                            dangerouslySetInnerHTML={{
-                                                __html: item.content,
+                    <div className="parking_container">
+                        <ScrollComponent
+                            hidden={{
+                                x: true,
+                            }}
+                        >
+                            <div className="parking_content">
+                                {values?.map((item) => {
+                                    return (
+                                        <Drag
+                                            key={item.code}
+                                            handleDragMove={({ name }) => {
+                                                handleDragMove({
+                                                    from: "1",
+                                                    data: { ...item },
+                                                    to: name,
+                                                });
                                             }}
-                                        />
-                                    </Drag>
-                                );
-                            })}
-                        </div>
-                    </ScrollComponent>
+                                            activeClassName="gray"
+                                            className={"selectOption"}
+                                            handleDragEnd={handleDragEnd}
+                                        >
+                                            <span
+                                                className="dragContent"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: item.content,
+                                                }}
+                                            />
+                                        </Drag>
+                                    );
+                                })}
+                            </div>
+                        </ScrollComponent>
+                    </div>
                 </div>
             </div>
         </DragBox>

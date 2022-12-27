@@ -10,6 +10,7 @@ import Parking from "./Parking";
 import { ScrollComponent } from "./Scroll";
 import { Warehouse } from "./warehouse";
 import Header from "./header";
+import Hr from "./hr";
 
 export const comms = new PluginComms({
     defaultConfig: new ConfigYML(),
@@ -158,7 +159,7 @@ const Main: React.FC = () => {
                         handleDragMove={handleDragMove}
                         handleDragEnd={handleDragEnd}
                     />
-                    <div className="hr" />
+                    <Hr />
 
                     <Parking
                         handleDragMove={handleDragMove}
