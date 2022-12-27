@@ -27,32 +27,34 @@ const Temp: React.FC = () => {
     const rows = comms.config.options?.[0] ?? [];
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
     return (
-        <ScrollComponent
-            className="mobileWrap"
-            bodyClassName="mobile_scrollBody"
-            hidden={{
-                y: true,
-            }}
-        >
-            <div
-                className="mobile_parkMain"
-                style={{
-                    width: `calc(calc(calc(100vw - 16px * 2 - 20px) / 1.7) * ${rows.length} + ${
-                        rows.length ? rows.length - 1 : 0
-                    } * 20px + 16px)`,
+        <div className="mobileWrapper">
+            <ScrollComponent
+                className="mobileWrap"
+                bodyClassName="mobile_scrollBody"
+                hidden={{
+                    y: true,
                 }}
             >
-                {rows.map((item) => {
-                    return (
-                        <ParkContainer
-                            key={item.code}
-                            rowData={item}
-                            className="mobile_parkContainer"
-                        />
-                    );
-                })}
-            </div>
-        </ScrollComponent>
+                <div
+                    className="mobile_parkMain"
+                    style={{
+                        width: `calc(calc(calc(100vw - 20px * 2 - 20px - 20px - 21px - 7px * 2) / 1.7) * ${
+                            rows.length
+                        } + ${rows.length ? rows.length - 1 : 0} * 20px )`,
+                    }}
+                >
+                    {rows.map((item) => {
+                        return (
+                            <ParkContainer
+                                key={item.code}
+                                rowData={item}
+                                className="mobile_parkContainer"
+                            />
+                        );
+                    })}
+                </div>
+            </ScrollComponent>
+        </div>
     );
 };
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */
