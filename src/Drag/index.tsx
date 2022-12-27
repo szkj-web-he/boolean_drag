@@ -84,6 +84,7 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
                     clientY: res.clientY,
                 });
 
+                timer.current && window.clearTimeout(timer.current);
                 const node = cRef.current;
                 if (!node) {
                     return;
@@ -192,6 +193,7 @@ import { useMemo } from 'react';
                     width: 0,
                     height: 0,
                 };
+                timer.current && window.clearTimeout(timer.current);
                 setPosition(undefined);
                 globalClass.current?.remove();
                 globalClass.current = undefined;
