@@ -16,8 +16,17 @@ body > div:first-child {
     overflow: hidden;
 }
 
-.wrapperScroll {
-    background: #fff;
+.wrapper {
+    background-image: url("./Image/bg.png");
+    background-color: transparent;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.wrapperBody {
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .question {
@@ -31,7 +40,7 @@ body > div:first-child {
 }
 
 .questionContent {
-    color: #212121;
+    color: #0e4b05;
     font-family: $fontFamily;
     font-style: normal;
     font-weight: 500;
@@ -41,23 +50,13 @@ body > div:first-child {
 }
 
 .questionDes {
-    color: #757575;
+    color: #3dba22;
     font-family: $fontFamily;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0.2px;
-}
-
-@mixin Total {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    font-family: $fontFamily;
-    letter-spacing: 0.2px;
-    color: #212121;
 }
 
 /****** 上方原始数据部分 start *********/
@@ -69,11 +68,11 @@ body > div:first-child {
     line-height: 20px;
     font-family: $fontFamily;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #fff;
 }
 
 .warehouse_totalVal {
-    color: #22a6b3;
+    color: #3dba22;
     margin: 0 5px;
 
     &.red {
@@ -106,7 +105,6 @@ body > div:first-child {
     line-height: 20px;
     font-size: 14px;
     font-weight: 400;
-    background-color: #fff;
     display: inline-block;
 }
 
@@ -114,8 +112,7 @@ body > div:first-child {
     padding: 8px 12px;
     box-sizing: content-box;
     border-radius: 6px;
-    border: 1px solid #ebebeb;
-
+    position: relative;
     @include DragItem();
     margin-right: 20px;
     margin-bottom: 16px;
@@ -126,6 +123,11 @@ body > div:first-child {
 
 .dragPortalContainer {
     @include DragItem();
+}
+
+.dragContent {
+    position: relative;
+    z-index: 5;
 }
 
 .dragContent * {
@@ -155,12 +157,12 @@ body > div:first-child {
     line-height: 20px;
     font-family: $fontFamily;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #fff;
     margin-bottom: 12px;
 }
 
 .parking_totalValue {
-    color: #22a6b3;
+    color: #3dba22;
     margin: 0 5px;
     display: inline-block;
 
@@ -170,25 +172,44 @@ body > div:first-child {
 }
 
 .deskWrap {
-    background-color: #fafafa;
-    border-radius: 10px;
-    padding: 20px 20px 0px 20px;
+    width: 100%;
+
+    border-image-slice: 16 20 15 21;
+    border-image-width: 16px 20px 15px 21px;
+    border-width: 16px 20px 0 21px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-source: url("./Image/box.png");
+    border-image-repeat: stretch stretch;
+    border-style: solid;
     box-sizing: border-box;
 
-    width: 100%;
+    background-image: url("./Image/bg_box.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+
+    padding: 4px 7px;
+
     .parkContainer {
-        margin-right: 24px;
+        margin-right: 20px;
         flex: 0 0 auto;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 }
 
 .deskContainer {
-    width: calc(100% + 24px);
+    width: calc(100% + 20px);
     display: flex;
     align-items: flex-start;
     flex-flow: row wrap;
     align-content: flex-start;
+    flex: 0 0 auto;
 }
 
 .parkContainer {
@@ -201,8 +222,7 @@ body > div:first-child {
     border: 1px solid #fff;
     transition: all 0.1s linear;
     &.active {
-        background: #e9f7f8;
-        border: 1px dashed #22a6b3;
+        background: #e6f8ee;
     }
 }
 
@@ -210,11 +230,14 @@ body > div:first-child {
     @include DragItem();
     padding: 8px 12px;
     box-sizing: content-box;
-    border-radius: 6px;
-    border: 1px solid #ebebeb;
     cursor: pointer;
     margin-right: 16px;
     margin-bottom: 13px;
+    position: relative;
+    .btn_contentColor {
+        border: 1px solid #014a22;
+        box-sizing: border-box;
+    }
 }
 
 .parkName {
@@ -224,7 +247,7 @@ body > div:first-child {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #0e4b05;
 }
 
 .parkName * {
@@ -241,7 +264,8 @@ body > div:first-child {
 /*************** btn_wrap start *****************************/
 .btn_wrap {
     &.gray {
-        background-color: rgba(gray, 0.2);
+        background: rgba(82, 174, 123, 0.4);
+        border-radius: 4px;
         * {
             visibility: hidden;
         }
@@ -252,17 +276,58 @@ body > div:first-child {
             visibility: hidden;
         }
     }
+    &:not(.gray):hover {
+        .btn_contentColor {
+            box-shadow: 0 0 4px rgba(#009944, 0.6);
+        }
+    }
+}
+
+.btn_topLine {
+    width: 24px;
+    height: 3px;
+    background-color: #8ac998;
+    position: absolute;
+    left: 11px;
+    top: 0.3px;
+    z-index: 2;
+}
+
+.btn_leftLine {
+    width: 3px;
+    height: 3px;
+    left: 0.3px;
+    top: 12px;
+    background-color: #8ac998;
+    z-index: 2;
+    position: absolute;
+}
+
+.btn_contentColor {
+    position: absolute;
+    top: 2.5px;
+    left: 1.8px;
+    width: calc(100% - 1.8px - 3px);
+    height: calc(100% - 2.5px - 3px);
+    background-color: #fff;
+    z-index: 1;
+}
+
+.btn_bg {
+    width: calc(100% - 11px);
+    height: calc(100% - 5px);
+    top: 5px;
+    left: 11px;
+    position: absolute;
+    z-index: 0;
+    background-color: #009944;
 }
 
 .dragPortalContainer {
-    @include DragItem();
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: row wrap;
-    border-radius: 6px;
-    border: 1px solid #ebebeb;
-    box-sizing: border-box;
 }
 
 /*************** btn_wrap end *****************************/
@@ -273,10 +338,26 @@ body > div:first-child {
     padding-bottom: 10px;
 }
 
+.ipad_border {
+    border-image-slice: 16 20 15 21;
+    border-image-width: 16px 20px 15px 21px;
+    border-width: 16px 20px 15px 21px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-source: url("./Image/box.png");
+    border-image-repeat: stretch stretch;
+    border-style: solid;
+    box-sizing: border-box;
+
+    background-image: url("./Image/bg_box.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-color: transparent;
+}
+
 .ipad_view {
-    background: #fafafa;
-    border-radius: 10px;
     width: 100%;
+    overflow: hidden;
 }
 
 .ipad_gallery {
@@ -287,21 +368,21 @@ body > div:first-child {
 }
 
 .ipadGroup_wrap {
-    padding: 20px;
     flex: 0 0 auto;
-    width: 100vw;
+    width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-flow: row wrap;
-    height: 180px * 2 + 20px + 20px * 2;
+    height: 180px * 2 + 15px + 4px * 2;
     box-sizing: border-box;
+    padding: 4px 7px;
 }
 
 .ipadGroup_item {
-    width: calc(calc(100vw - 20px * 2 - 2 * 24px) / 3);
-    margin-right: 24px;
-    margin-bottom: 20px;
+    width: calc(calc(100vw - 20px - 21px - 20px * 2 - 20px * 2 - 7px * 2) / 3);
+    margin-right: 20px;
+    margin-bottom: 15px;
     &:nth-child(3n) {
         margin-right: 0;
     }
@@ -333,7 +414,7 @@ body > div:first-child {
     }
     &.active {
         width: 40px;
-        background: rgba(#bdbdbd, 0.8);
+        background: rgba(#0e4b05, 0.8);
     }
 }
 
@@ -341,12 +422,27 @@ body > div:first-child {
 
 /***** 手机样式 start ******/
 
+.mobileWrapper {
+    border-image-slice: 16 20 15 21;
+    border-image-width: 16px 20px 15px 21px;
+    border-width: 16px 20px 15px 21px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-source: url("./Image/box.png");
+    border-image-repeat: stretch stretch;
+    border-style: solid;
+    box-sizing: border-box;
+
+    background-image: url("./Image/bg_box.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-color: transparent;
+}
+
 .mobileWrap {
     width: 100%;
     height: 212px;
-    background: #fafafa;
-    border-radius: 10px;
-
+    padding: 4px 7px;
     .selectOption {
         margin-right: 10px;
     }
@@ -357,7 +453,6 @@ body > div:first-child {
 }
 
 .mobile_scrollBody {
-    padding: 16px 0 16px 16px;
     box-sizing: border-box;
 }
 
@@ -371,7 +466,7 @@ body > div:first-child {
 .mobile_parkContainer {
     margin-left: 20px;
     flex: 0 0 auto;
-    width: calc(calc(100vw - 16px * 2 - 20px) / 1.7);
+    width: calc(calc(100vw - 20px * 2 - 20px - 21px - 7px * 2 - 20px) / 1.7);
     &:first-child {
         margin-left: 0;
     }
@@ -381,4 +476,46 @@ body > div:first-child {
 
 .parkContent_itemList {
     width: calc(100% + 16px);
+}
+
+.hr_wrap {
+    margin: 33px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+    height: 16px;
+}
+
+.hr_left {
+    width: 5px;
+    height: 100%;
+    flex: 0 0 auto;
+    background-image: url("./Image/hr_left.png");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 100% 100%;
+}
+
+.hr_center {
+    height: 16px;
+    flex: 1 1 auto;
+    width: calc(100% - 5px - 9px);
+    background-image: url("./Image/hr_center.png");
+    background-color: transparent;
+    background-repeat: repeat-x;
+    background-position: top left;
+    background-size: auto 100%;
+}
+
+.hr_right {
+    width: 9px;
+    height: 100%;
+    flex: 0 0 auto;
+    background-image: url("./Image/hr_right.png");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100% 100%;
 }

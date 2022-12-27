@@ -28,6 +28,10 @@ const Temp = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
         return (
             <div className={`btn_wrap${className ? ` ${className}` : ""}`} ref={ref} {...props}>
                 {children}
+                <div className="btn_topLine" />
+                <div className="btn_leftLine" />
+                <div className="btn_contentColor" />
+                <div className="btn_bg" />
             </div>
         );
     },
