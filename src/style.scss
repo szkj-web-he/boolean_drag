@@ -16,8 +16,20 @@ body > div:first-child {
     overflow: hidden;
 }
 
+.wrapper {
+    background-image: url("./Image/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 90% 50%;
+    background-color: transparent;
+}
+
 .wrapperScroll {
-    background: #fff;
+    background-color: rgba(#212121, 0.1);
+}
+
+.wrapperBody {
+    padding: 0 20px;
 }
 
 .question {
@@ -31,7 +43,7 @@ body > div:first-child {
 }
 
 .questionContent {
-    color: #212121;
+    color: #287788;
     font-family: $fontFamily;
     font-style: normal;
     font-weight: 500;
@@ -41,23 +53,13 @@ body > div:first-child {
 }
 
 .questionDes {
-    color: #757575;
+    color: #f5f5f5;
     font-family: $fontFamily;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0.2px;
-}
-
-@mixin Total {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    font-family: $fontFamily;
-    letter-spacing: 0.2px;
-    color: #212121;
 }
 
 /****** 上方原始数据部分 start *********/
@@ -69,11 +71,11 @@ body > div:first-child {
     line-height: 20px;
     font-family: $fontFamily;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #fff;
 }
 
 .warehouse_totalVal {
-    color: #22a6b3;
+    color: #25d9ff;
     margin: 0 5px;
 
     &.red {
@@ -111,14 +113,14 @@ body > div:first-child {
 }
 
 .dragItem {
-    padding: 8px 12px;
+    padding: 5px 9px;
     box-sizing: content-box;
     border-radius: 6px;
-    border: 1px solid #ebebeb;
-
     @include DragItem();
     margin-right: 20px;
     margin-bottom: 16px;
+    position: relative;
+    transition: all 0.1s linear;
     cursor: pointer;
 }
 
@@ -137,13 +139,7 @@ body > div:first-child {
     position: absolute !important;
     pointer-events: none;
     box-sizing: border-box;
-}
-
-.hr {
-    margin: 40px 0;
-    width: 100%;
-    height: 1px;
-    background-color: #ebebeb;
+    border-radius: 6px;
 }
 
 .placeholder {
@@ -160,39 +156,67 @@ body > div:first-child {
 
 .optionItem {
     width: 100%;
-    height: 163px;
-    background: #fafafa;
-    border-radius: 10px;
+    height: 220px;
+
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 10px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: row nowrap;
+    box-sizing: border-box;
+
+    position: relative;
     &.active {
         .parking_body {
-            border: 1px dashed #22a6b3;
-            background: #e9f7f8;
+            background: #e3f1f4;
         }
     }
 }
 
+.parking_icon {
+    position: absolute;
+    right: -20px;
+    top: -30px;
+}
+
 .selectOption {
     @include DragItem();
-    padding: 8px 12px;
+    padding: 5px 9px;
     box-sizing: content-box;
     border-radius: 6px;
-    border: 1px solid #ebebeb;
     cursor: pointer;
+    margin-right: 16px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.parking_wrapper {
+    width: calc(100% - 8px * 2);
+    height: calc(100% - 8px * 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+    background-color: #f7fbfe;
+    border-radius: 4px;
+    box-shadow: 0 -5px 0 4px rgba(#f7fbff, 0.16);
 }
 
 .parking_body {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    background: #ffffff;
-    box-shadow: 0px 2px 8px rgba(26, 26, 26, 0.08), 0px 2px 4px rgba(26, 26, 26, 0.03);
-    border-radius: 6px;
-    padding: 8px 12px;
+    width: calc(100% - 9px * 2);
+    height: calc(100% - 8px * 2);
+    background: #f7fbfe;
+    border-radius: 1px;
+    padding: 9px 14px;
     box-sizing: border-box;
-    border: 1px solid #fff;
+    border: 1px solid #ddebf1;
     transition: all 0.1s linear;
 }
 
@@ -203,7 +227,7 @@ body > div:first-child {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.2px;
-    color: #bdbdbd;
+    color: #2296af;
 }
 
 .headContent * {
@@ -215,12 +239,27 @@ body > div:first-child {
     margin-top: 17px;
 }
 
+.parking_content {
+    width: calc(100% + 16px);
+}
+
 /********** 下方 放置区域 end ******************/
 
 /*************** btn_wrap start *****************************/
 .btn_wrap {
+    border-image-source: url("./Image/btn_bg.png");
+    border-image-slice: 16;
+    border-image-width: 3px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-style: solid;
+    &:not(.gray):hover {
+        box-shadow: 0 0 5px rgba(#fff, 0.8);
+    }
     &.gray {
-        background-color: rgba(gray, 0.2);
+        background-color: rgba(#fff, 0.4);
+        border-image: none;
+        border-color: transparent;
         * {
             visibility: hidden;
         }
@@ -234,14 +273,50 @@ body > div:first-child {
 }
 
 .dragPortalContainer {
-    @include DragItem();
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: row wrap;
-    border-radius: 6px;
-    border: 1px solid #ebebeb;
-    box-sizing: border-box;
 }
 
 /*************** btn_wrap end *****************************/
+
+.hr_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+    margin-top: 20px;
+    margin-bottom: 26px;
+}
+
+.hr_left {
+    flex: 1 1 auto;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.hr_center {
+    width: 46px;
+    height: 28px;
+    background-image: url("./Image/hr.png");
+    background-color: transparent;
+    margin: 0 12px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 0 0;
+}
+
+.hr_right {
+    flex: 1 1 auto;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.btn_icon {
+    position: absolute;
+    right: -16px;
+    bottom: -10px;
+}

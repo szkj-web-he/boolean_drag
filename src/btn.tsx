@@ -7,6 +7,7 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import React, { forwardRef } from "react";
+import btnIcon from "./Image/icon.png";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -28,6 +29,7 @@ const Temp = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
         return (
             <div className={`btn_wrap${className ? ` ${className}` : ""}`} ref={ref} {...props}>
                 {children}
+                <img src={btnIcon} alt="" className="btn_icon" />
             </div>
         );
     },
