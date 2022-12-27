@@ -83,6 +83,7 @@ export const Drag = forwardRef<HTMLDivElement, DragProps>(
                     clientX: res.clientX,
                     clientY: res.clientY,
                 });
+                timer.current && window.clearTimeout(timer.current);
 
                 const node = cRef.current;
                 if (!node) {
@@ -182,6 +183,7 @@ import { useMemo } from 'react';
                 globalClass.current = undefined;
             },
             () => {
+                timer.current && window.clearTimeout(timer.current);
                 //触摸取消
                 handleDragCancel?.();
                 point.current = {
