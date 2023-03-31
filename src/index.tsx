@@ -4,7 +4,7 @@ import "./style.scss";
 import React, { useEffect, useRef, useState } from "react";
 import { deepCloneData, OptionProps } from "./unit";
 
-import { ConfigYML, PluginComms } from "@possie-engine/dr-plugin-sdk";
+import { ConfigYML, PluginComms } from "@datareachable/dr-plugin-sdk";
 import { BoxItem, DragContext } from "./dragContext";
 import Parking from "./Parking";
 import { ScrollComponent } from "./Scroll";
@@ -39,7 +39,19 @@ const Main: React.FC = () => {
     /**
      * 已被选择的选项
      */
-    const [selectList, setSelectList] = useState<OptionProps>();
+    const [selectList, setSelectList] = useState(() => {
+        const state = comms.state as Record<string, string>;
+
+        let answer = "";
+        for (const key in state) {
+            answer = state[key];
+        }
+
+        const options = comms.config.options ?? [];
+
+        const data = options.find((item) => item.code === answer);
+        return data ? deepCloneData(data) : undefined;
+    });
 
     const boxesRef = useRef<Array<BoxItem>>([]);
 
