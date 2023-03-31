@@ -29,7 +29,7 @@ body > div:first-child {
 }
 
 .wrapperBody {
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .question {
@@ -293,8 +293,8 @@ body > div:first-child {
     border-style: solid;
     border-radius: 4px;
     background-color: #f7fbfe;
-    transition: all 0.1s linear;
-    &:hover {
+    transition: box-shadow 0.1s linear;
+    &:not(.gray):hover {
         box-shadow: 0 0 5px rgba(#fff, 0.8);
     }
     &.gray {
