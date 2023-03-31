@@ -29,7 +29,7 @@ body > div:first-child {
 }
 
 .wrapperBody {
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .question {
@@ -265,6 +265,7 @@ body > div:first-child {
     border-image-outset: 0;
     border-image-repeat: stretch;
     border-style: solid;
+    transition: box-shadow 0.1s linear;
     &:not(.gray):hover {
         box-shadow: 0 0 5px rgba(#fff, 0.8);
     }
