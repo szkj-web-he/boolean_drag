@@ -29,7 +29,7 @@ body > div:first-child {
 }
 
 .wrapperBody {
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .question {
@@ -121,6 +121,7 @@ body > div:first-child {
     margin-right: 20px;
     margin-bottom: 16px;
     cursor: pointer;
+    transition: box-shadow 0.1s linear;
 }
 
 /****** 上方原始数据部分 end *********/
