@@ -1,3 +1,5 @@
+import { comms } from ".";
+
 export interface OptionProps {
     code: string;
     content: string;
@@ -163,3 +165,29 @@ export const autoScroll = (
 };
 
 export const isIpad = (): boolean => window.matchMedia("(min-width: 501px)").matches;
+
+/**
+ * 答案回溯
+ */
+export const getState = (): Record<string, OptionProps | null> => {
+    const state = comms.state as Record<string, string>;
+    const stateData: Record<string, string> = {};
+    for (const key in state) {
+        stateData[key.split("#")[1]] = state[key];
+    }
+
+    const rows = comms.config.options?.[0] ?? [];
+
+    const cols = comms.config.options?.[1] ?? [];
+
+    const data: Record<string, OptionProps | null> = {};
+
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+
+        const col = cols.find((item) => item.code === stateData[row.code]);
+
+        data[row.code] = col ? deepCloneData(col) : null;
+    }
+    return data;
+};

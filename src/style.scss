@@ -25,7 +25,7 @@ body > div:first-child {
 }
 
 .wrapperBody {
-    padding: 0 20px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -50,7 +50,7 @@ body > div:first-child {
 }
 
 .questionDes {
-    color: #3dba22;
+    color: #009944;
     font-family: $fontFamily;
     font-style: normal;
     font-weight: 400;
@@ -68,11 +68,11 @@ body > div:first-child {
     line-height: 20px;
     font-family: $fontFamily;
     letter-spacing: 0.2px;
-    color: #fff;
+    color: #8ac998;
 }
 
 .warehouse_totalVal {
-    color: #3dba22;
+    color: #009944;
     margin: 0 5px;
 
     &.red {
@@ -157,12 +157,12 @@ body > div:first-child {
     line-height: 20px;
     font-family: $fontFamily;
     letter-spacing: 0.2px;
-    color: #fff;
+    color: #8ac998;
     margin-bottom: 12px;
 }
 
 .parking_totalValue {
-    color: #3dba22;
+    color: #009944;
     margin: 0 5px;
     display: inline-block;
 
