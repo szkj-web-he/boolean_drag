@@ -43,9 +43,5 @@ options:
         { "code": "37", "content": "睫毛夹" },
     ]
 
-# How many options you can ranking
-column: 8
-# column: 5
-
 # options instruction
 optionsInstruction: "请将答案选项放置在这里"
