@@ -11,6 +11,7 @@ import { ScrollComponent } from "./Scroll";
 import { Warehouse } from "./warehouse";
 import Header from "./header";
 import Hr from "./hr";
+import Bg from "./bg";
 
 export const comms = new PluginComms({
     defaultConfig: new ConfigYML(),
@@ -125,6 +126,7 @@ const Main: React.FC = () => {
     /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
     return (
         <div className={`wrapper`}>
+            <Bg />
             <ScrollComponent
                 hidden={{
                     x: true,
